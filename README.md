@@ -3,7 +3,7 @@
 <br />
 This project is a representation of a New's Page based on the top stories on The New York Times API. <br />
 You can use the search bar to look for keywords on the titles, try to search for (sub) sections and navigate between pages.<br />
-Hopw you enjoy it! <br />
+Hopw you enjoy it! <br /><br />
 
 **Overview**
 <br />
