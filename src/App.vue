@@ -7,26 +7,37 @@
     <div class="section-divider">
       <span class="sectionTitle"> Featured </span>
     </div>
-    <div v-for="featured in featuredNews" :key="featured.rank">
-      <FeaturedNews
-        :headlineTitle="featured.title"
-        :headlineDescription="featured.abstract"
-        :imageSrc="getImagem(featured)"
-        :newsUrl="getUrl(featured)"/>
+    <div v-if="featuredNews && featuredNews.length">
+      <div v-for="featured in featuredNews" :key="featured.rank">
+        <FeaturedNews
+                :headlineTitle="featured.title"
+                :headlineDescription="featured.abstract"
+                :imageSrc="getImagem(featured)"
+                :newsUrl="getUrl(featured)"/>
+      </div>
+    </div>
+    <div v-else>
+      <span> No results found! </span>
     </div>
     <hr class="divider"/>
     <div class="section-divider">
       <span class="sectionTitle"> Latest </span>
     </div>
-    <div v-for="latest in latestNews" :key="latest.rank">
-      <LatestNews
-        :headlineTitle="latest.title"
-        :headlineDescription="latest.abstract"
-        :newsUrl="getUrl(latest)"
-      />
+    <div v-if="latestNews && latestNews.length">
+      <div v-for="latest in latestNews" :key="latest.rank">
+        <LatestNews
+            :headlineTitle="latest.title"
+            :headlineDescription="latest.abstract"
+            :newsUrl="getUrl(latest)"
+        />
+      </div>
+    </div>
+    <div v-else>
+      <span> No results found! </span>
     </div>
     <Pagination
-      :totalNews="totalNews"/>
+      v-if="totalNews > 0"
+      v-on:pageSelected="getNewsFromPage"/>
   </div>
 </template>
 
@@ -52,7 +63,8 @@ export default {
       allNews: [],
       sections: [],
       sectionSelected: '',
-      totalNews: 0
+      totalNews: 0,
+      initialPage: 0
     }
   },
   created() {
@@ -66,8 +78,10 @@ export default {
   methods: {
     getNews(news, sectionSelected) {
       let selectedNews =  sectionSelected === '' ? news : news.filter(item => item.subsection === sectionSelected);
-      this.featuredNews = selectedNews.slice(0, 3);
-      this.latestNews = selectedNews.slice(3, 12);
+      const initialFeatured = this.initialPage;
+      const finalFeatured = initialFeatured + 3;
+      this.featuredNews = selectedNews.slice(initialFeatured, (initialFeatured + 3));
+      this.latestNews = selectedNews.slice(finalFeatured, finalFeatured + 9);
       this.sectionSelected = sectionSelected;
       this.totalNews = this.allNews.length;
     },
@@ -87,6 +101,18 @@ export default {
     getSelectedNews(n) {
       const news = this.allNews.filter(item => item.title.toLocaleLowerCase().includes(n.toLowerCase()) );
       this.getNews(news, this.sectionSelected);
+    },
+    getNewsFromPage(page) {
+      this.initialPage = page - 1;
+      this.getNews(this.allNews, this.sectionSelected);
+    },
+    initiateLocalStorage() {
+      localStorage.setItem('totalPages', parseInt(this.totalNews/9));
+    }
+  },
+  watch: {
+    totalNews: function () {
+      this.initiateLocalStorage();
     }
   }
 }
