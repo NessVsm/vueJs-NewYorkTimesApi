@@ -1,22 +1,21 @@
 <template>
-    <div class="headline">
-        <md-card>
+    <div class="headline" @click="onClick(newsUrl)">
+        <md-card md-with-hover>
             <md-card-media-cover md-solid>
-                <md-card-media md-ratio="1:1">
-                    <img src="" alt="Skyscraper">
+                <md-card-media>
+                    <img :src="imageSrc">
                 </md-card-media>
-
                 <md-card-area>
                     <md-card-header>
                         <span class="md-title">{{ headlineTitle }}</span>
-                        <span class="md-subhead">1/1 image</span>
+                        <span class="md-subhead"> {{ headlineDescription }}</span>
                     </md-card-header>
                 </md-card-area>
             </md-card-media-cover>
         </md-card>
-
     </div>
 </template>
+
 
 <script>
 export default {
@@ -24,12 +23,13 @@ export default {
     props: {
         headlineTitle: String,
         headlineDescription: String,
-        imageSrc: String
+        imageSrc: String,
+        newsUrl: String
+    },
+    methods: {
+        onClick(url) {
+            window.location = url;
+        }
     }
 }
 </script>
-<style scoped>
- .headline {
-       width: 100%;
-   }
-</style>
