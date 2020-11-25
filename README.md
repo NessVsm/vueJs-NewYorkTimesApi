@@ -1,4 +1,3 @@
-
 ## What is it about?
 <br />
 This project is a representation of a New's Page based on the top stories on The New York Times API. <br />
@@ -30,6 +29,11 @@ You can check the project using the default url http://localhost:8080/. If you w
 ```
 npm run serve --port 4500
 ``` 
+**Screenshots** <br />
+![image](https://user-images.githubusercontent.com/23099620/100292651-d5c83b00-2f5f-11eb-9d90-661712d6f9b1.png)
+![image](https://user-images.githubusercontent.com/23099620/100292810-525b1980-2f60-11eb-8295-1eeeb2af9fa5.png)
+![image](https://user-images.githubusercontent.com/23099620/100292738-1e7ff400-2f60-11eb-8a64-867ad2c1059e.png)
+
 
 **What comes next?** <br />
 
