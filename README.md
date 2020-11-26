@@ -15,7 +15,7 @@ The API used can be found at https://api.nytimes.com/svc/topstories/v2/home.json
 **How to run the project**
 1. Make a copy of the project using the command. You should have git (https://git-scm.com/) already installed 
 ```
-git clone https://github.com/NessVsm/vueJs-news.git
+git clone https://github.com/NessVsm/vueJs-NewYorkTimesApi.git
 ```
 
 2. Install all the dependencies. You should have npm (https://www.npmjs.com/) already installed in your computer
